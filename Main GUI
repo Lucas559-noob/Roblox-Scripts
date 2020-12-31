@@ -14,32 +14,68 @@ b:Button("Get Presents",function()
 end)
 
 b:Dropdown("Buy pets from event",{"Snow Owl","Snowman","Grinch","Past Dominus","Penguin","Snow Wolf","Polar Bear","Present Dominus","Reindeer","Evil Elf","Future Dominus"},true,function(egg) --Replace the Dropdown name with the selected one(A,B,C)
-    local A_1 = (egg) --egg number/number of egg or egg/pet name("Grinch" for the xmas event, no cost)
-local Event = game:GetService("ReplicatedStorage").Remotes.CanBuyEgg
-Event:InvokeServer(A_1)
+EggValueThing = egg
 end)
 
+b:Box("Quantity","number",function(value) 
+    fornumberthing = value -- fornumberthing is so we can access the number out of the box
+end)
 
+b:Button("Buy",function()
+    local A_1 = EggValueThing --egg number or pet name(in dropdown)
+    local Event = game:GetService("ReplicatedStorage").Remotes.CanBuyEgg
+    for i = 1,fornumberthing do--number of the box
+    Event:InvokeServer(A_1)
+    end
+end)
 b:Label("Pets/Eggs",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111)) --BgColor,TextColor
 
 b:Box("Upgrade","string",function(value) -- "number" or "string"
-    local A_1 = (value) --put G at end if want to upgrade from gold to or D to upgrade from Diamond to idk
-    local Event = game:GetService("ReplicatedStorage").Remotes.UpgradePet
-    Event:FireServer(A_1)
+    namepet = value --put G at end if want to upgrade from gold to or D to upgrade from Diamond to idk
 end)
 
+b:Box("Quantity","number",function(value) 
+    hmany = value -- fornumberthing is so we can access the number out of the box
+end)
+
+b:Button("Button",function()
+local A_1 = namepet --put G at end if want to upgrade from gold to or D to upgrade from Diamond to idk
+    local Event = game:GetService("ReplicatedStorage").Remotes.UpgradePet
+for i = 1,hmany do   
+Event:FireServer(A_1)
+end
+end)
 b:Dropdown("Buy Eggs, by order of eggs",{"EggOne","EggTwo","EggThree","EggFour","EggFive","EggSix","EggSeven","EggEight","EggNine","EggTen","EggEleven","EggTweleve","EggThirteen"},true,function(egg) --Replace the Dropdown name with the selected one(A,B,C)
-    local A_1 = (egg) --egg number/number of egg or egg/pet name("Grinch" for the xmas event, no cost)
-local Event = game:GetService("ReplicatedStorage").Remotes.CanBuyEgg
-Event:InvokeServer(A_1)
+    simple = egg --egg number/number of egg or egg/pet name("Grinch" for the xmas event, no cost)
+end)
+
+b:Box("Quantity","number",function(value) 
+    qnt = value -- fornumberthing is so we can access the number out of the box
+end)
+
+b:Button("Button",function()
+    local A_1 = simple --egg number or pet name(in dropdown)
+    local Event = game:GetService("ReplicatedStorage").Remotes.CanBuyEgg
+    for i = 1,qnt do--number of the box
+    Event:InvokeServer(A_1)
+    end
 end)
 
 b:Dropdown("Bobux egg",{"ReverseFlashEgg","SonicEgg","ThanosEgg"},true,function(egg) --Replace the Dropdown name with the selected one(A,B,C)
-    local A_1 = (egg) --egg number/number of egg or egg/pet name("Grinch" for the xmas event, no cost)
-local Event = game:GetService("ReplicatedStorage").Remotes.CanBuyEgg
-Event:InvokeServer(A_1)
+    bobux = egg --egg number/number of egg or egg/pet name("Grinch" for the xmas event, no cost)
 end)
 
+b:Box("Quantity","number",function(value) 
+    qnt2 = value -- fornumberthing is so we can access the number out of the box
+end)
+
+b:Button("Button",function()
+    local A_1 = bobux --egg number or pet name(in dropdown)
+    local Event = game:GetService("ReplicatedStorage").Remotes.CanBuyEgg
+    for i = 1,qnt2 do--number of the box
+    Event:InvokeServer(A_1)
+    end
+end)
 
 b:Label("Farm",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111)) --BgColor,TextColor
 

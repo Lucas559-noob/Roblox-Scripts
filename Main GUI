@@ -1,0 +1,66 @@
+local library = loadstring(game:HttpGet(('https://pastebin.com/raw/FsJak6AT')))() -- It's obfuscated, I won't let you see my ugly coding skills. =)
+
+local w = library:CreateWindow("Window")
+
+local b = w:CreateFolder("Folder")
+
+b:Label("Xmas",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111)) --BgColor,TextColor
+
+b:Button("Get Presents",function()
+    for i,v in pairs(game.Workspace.Presents:GetChildren())do
+        wait(0.3)
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+        end
+end)
+
+b:Dropdown("Buy pets from event",{"Snow Owl","Snowman","Grinch","Past Dominus","Penguin","Snow Wolf","Polar Bear","Present Dominus","Reindeer","Evil Elf","Future Dominus"},true,function(egg) --Replace the Dropdown name with the selected one(A,B,C)
+    local A_1 = (egg) --egg number/number of egg or egg/pet name("Grinch" for the xmas event, no cost)
+local Event = game:GetService("ReplicatedStorage").Remotes.CanBuyEgg
+Event:InvokeServer(A_1)
+end)
+
+
+b:Label("Pets/Eggs",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111)) --BgColor,TextColor
+
+b:Box("Upgrade","string",function(value) -- "number" or "string"
+    local A_1 = (value) --put G at end if want to upgrade from gold to or D to upgrade from Diamond to idk
+    local Event = game:GetService("ReplicatedStorage").Remotes.UpgradePet
+    Event:FireServer(A_1)
+end)
+
+b:Dropdown("Buy Eggs, by order of eggs",{"EggOne","EggTwo","EggThree","EggFour","EggFive","EggSix","EggSeven","EggEight","EggNine","EggTen","EggEleven","EggTweleve","EggThirteen"},true,function(egg) --Replace the Dropdown name with the selected one(A,B,C)
+    local A_1 = (egg) --egg number/number of egg or egg/pet name("Grinch" for the xmas event, no cost)
+local Event = game:GetService("ReplicatedStorage").Remotes.CanBuyEgg
+Event:InvokeServer(A_1)
+end)
+
+b:Dropdown("Bobux egg",{"ReverseFlashEgg","SonicEgg","ThanosEgg"},true,function(egg) --Replace the Dropdown name with the selected one(A,B,C)
+    local A_1 = (egg) --egg number/number of egg or egg/pet name("Grinch" for the xmas event, no cost)
+local Event = game:GetService("ReplicatedStorage").Remotes.CanBuyEgg
+Event:InvokeServer(A_1)
+end)
+
+
+b:Label("Farm",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111)) --BgColor,TextColor
+
+b:Toggle("Speed",function(bool)
+    shared.toggle = bool
+    _G.spid = (shared.toggle)
+    local Event = game:GetService("ReplicatedStorage").Remotes.AddSpeed
+    while _G.spid do
+    wait()
+    Event:FireServer()
+    end
+end)
+
+b:Toggle("Rebirth",function(reb)
+    shared.toggle = reb
+    _G.Rebirth = (shared.toggle)
+    while _G.Rebirth do
+    wait()
+    local Event = game:GetService("ReplicatedStorage").Remotes.Rebirth
+    Event:FireServer()
+    end
+end)
+
+b:DestroyGUI()

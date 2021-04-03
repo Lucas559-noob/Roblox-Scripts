@@ -1,0 +1,157 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local SpeedSim = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local Frame = Instance.new("Frame")
+local Buy = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local Prestige = Instance.new("TextButton")
+local UICorner_3 = Instance.new("UICorner")
+local Sell = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+local Orbs = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local Gems = Instance.new("TextButton")
+local UICorner_6 = Instance.new("UICorner")
+local UICorner_7 = Instance.new("UICorner")
+local UICorner_8 = Instance.new("UICorner")
+
+--Properties:
+
+SpeedSim.Name = "SpeedSim"
+SpeedSim.Parent = game.CoreGui
+SpeedSim.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = SpeedSim
+MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MainFrame.Position = UDim2.new(0.5, -92, 0.5, -19)
+MainFrame.Size = UDim2.new(0, 184, 0, 38)
+MainFrame.Active = true 
+MainFrame.Draggable = true 
+
+TextLabel.Parent = MainFrame
+TextLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+TextLabel.Size = UDim2.new(0, 184, 0, 38)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Speed Simulator"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+UICorner.Parent = TextLabel
+
+Frame.Parent = MainFrame
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Frame.Position = UDim2.new(0, 0, 1.05684209, 0)
+Frame.Size = UDim2.new(0, 184, 0, 169)
+
+Buy.Name = "Buy"
+Buy.Parent = Frame
+Buy.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Buy.Position = UDim2.new(0.494873047, 0, 0.295857996, 0)
+Buy.Size = UDim2.new(0, 92, 0, 49)
+Buy.Font = Enum.Font.SourceSans
+Buy.Text = "Buy Drinks"
+Buy.TextColor3 = Color3.fromRGB(255, 255, 255)
+Buy.TextScaled = true
+Buy.TextSize = 14.000
+Buy.TextWrapped = true
+--================================--
+Buy.MouseButton1Click:Connect(function() -- listen out for an event
+	local tools = game:GetService("ReplicatedStorage").Tools:GetChildren()
+	for i = 1,#tools do 
+		local Event = game:GetService("ReplicatedStorage").ShopBuy
+		Event:FireServer(i)
+	end
+end)
+
+UICorner_2.Parent = Buy
+
+Prestige.Name = "Prestige"
+Prestige.Parent = Frame
+Prestige.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Prestige.Position = UDim2.new(0, 0, 0.291124344, 0)
+Prestige.Size = UDim2.new(0, 90, 0, 50)
+Prestige.Font = Enum.Font.SourceSans
+Prestige.Text = "Prestige"
+Prestige.TextColor3 = Color3.fromRGB(255, 255, 255)
+Prestige.TextScaled = true
+Prestige.TextSize = 14.000
+Prestige.TextWrapped = true
+------========================-----------
+Prestige.MouseButton1Click:Connect(function() -- listen out for an event
+	local Event = game:GetService("Workspace").PrestigeEvent.Prestige
+	Event:FireServer("130ss1")
+end)
+UICorner_3.Parent = Prestige
+
+Sell.Name = "Sell"
+Sell.Parent = Frame
+Sell.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Sell.Position = UDim2.new(0, 0, 0.58349824, 0)
+Sell.Size = UDim2.new(0, 90, 0, 50)
+Sell.Font = Enum.Font.SourceSans
+Sell.Text = "Best Sell"
+Sell.TextColor3 = Color3.fromRGB(255, 255, 255)
+Sell.TextScaled = true
+Sell.TextSize = 14.000
+Sell.TextWrapped = true
+--=================================--
+Sell.MouseButton1Click:Connect(function() -- listen out for an event
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1857.51, 63.6821, -747.704))
+end)
+
+UICorner_4.Parent = Sell
+
+Orbs.Name = "Orbs"
+Orbs.Parent = Frame
+Orbs.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Orbs.Size = UDim2.new(0, 91, 0, 49)
+Orbs.Font = Enum.Font.SourceSans
+Orbs.Text = "Bring Orbs"
+Orbs.TextColor3 = Color3.fromRGB(255, 255, 255)
+Orbs.TextScaled = true
+Orbs.TextSize = 14.000
+Orbs.TextWrapped = true
+------========================----
+Orbs.MouseButton1Click:Connect(function() -- listen out for an event
+	for i,v in pairs(game:GetService("Workspace").OrbsPositions:GetDescendants()) do
+		if v:IsA("Part") then
+			v.CFrame = game.workspace[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame
+		end
+	end
+end)
+UICorner_5.Parent = Orbs
+
+Gems.Name = "Gems"
+Gems.Parent = Frame
+Gems.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+Gems.Position = UDim2.new(0.494565219, 0, 0, 0)
+Gems.Size = UDim2.new(0, 93, 0, 49)
+Gems.Font = Enum.Font.SourceSans
+Gems.Text = "Bring Gems"
+Gems.TextColor3 = Color3.fromRGB(255, 255, 255)
+Gems.TextScaled = true
+Gems.TextSize = 14.000
+Gems.TextWrapped = true
+-------==========================---
+Gems.MouseButton1Click:Connect(function() -- listen out for an event
+	for i,v in pairs(game:GetService("Workspace").Gems:GetDescendants()) do
+		if v:IsA("MeshPart") and v.CanCollide == "false" then
+			wait()
+			v.CFrame = game.workspace[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame
+		end
+	end
+end)
+UICorner_6.Parent = Gems
+
+UICorner_7.Parent = Frame
+
+UICorner_8.Parent = MainFrame

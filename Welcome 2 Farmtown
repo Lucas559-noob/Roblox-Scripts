@@ -1,0 +1,64 @@
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/AikaV3rm/UiLib/master/Lib.lua')))()
+
+local w = library:CreateWindow("Welcome 2 Farmtown") -- Creates the window
+
+local b = w:CreateFolder("Teleports") -- Creates the folder(U will put here your buttons,etc)
+
+b:Label("Stores",{
+    TextSize = 25; -- Self Explaining
+    TextColor = Color3.fromRGB(255,255,255); -- Self Explaining
+    BgColor = Color3.fromRGB(69,69,69); -- Self Explaining
+    
+}) 
+
+
+b:Dropdown("Teleport",{"Gas Station","Grocery Store","Daisy's Furniture Store","Machine Shop","Bakery","Pitchfork Jeb's"},true,function(store) --true/false, replaces the current title "Dropdown" with the option that t
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.TeleportPoints[store].CFrame
+end)
+
+b:Dropdown("Misc",{"Giving Tree","TechStore","ShippingDocs","TheMerchant","Lumberjack"},true,function(misc) --true/false, replaces the current title "Dropdown" with the option that t
+if (misc) == "Giving Tree" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-480.160309, 289.001709, -783.360229))
+else
+if (misc) == "TechStore" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-217.66246, 144.023483, 484.866394))
+else
+if (misc) == "ShippingDocs" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(1377.93591, 125.796196, -139.318619))
+else
+if (misc) == "TheMerchant" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-192.742432, 144.023468, 714.177185))
+else
+if (misc) == "Lumberjack" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(59.5643692, 181.007492, -902.387695))
+else
+	print"choosed other option out of those"
+end
+end
+end
+end
+end
+end)
+
+b:Dropdown("Mine",{"Starter 1-2","Starter 3","Starter 4","ChromiumMine","VanadiumMine"},true,function(mine) --true/false, replaces the current title "Dropdown" with the option that t
+if (mine) == "Starter 1-2" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-944.196655, 128.1194, 116.31031))
+else
+if (mine) == "Starter 3" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-999.06488, 57.0477028, -58.2114944))
+else
+if(mine) == "Starter 4" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1001.02527, 12.4091387, 27.013483))
+else
+if(mine) == "ChromiumMine" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(239.028152, 127.17025, -1769.14978))
+else
+if(mine) == "VanadiumMine" then
+	game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-1721.3219, 297.011414, 1884.28174))
+end
+end
+end
+end
+end
+end)
+b:DestroyGui()

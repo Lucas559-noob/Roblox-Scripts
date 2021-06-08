@@ -1,0 +1,26 @@
+_G.ToggleColor = Color3.fromRGB(255,0,0)
+_G.ButtonColor = Color3.fromRGB(0,255,0)
+_G.SliderColor = Color3.fromRGB(0,0,255)
+
+local library = loadstring(game:HttpGet(('https://pastebin.com/raw/FsJak6AT')))() -- It's obfuscated, I won't let you see my ugly coding skills. =)
+
+local w = library:CreateWindow("Camping 3")
+
+local b = w:CreateFolder("Teleports")
+
+b:Button("Lodge",function()
+game.Players.LocalPlayer.Character:MoveTo(Vector3.new(22.8976, 15.21, -49.2815))
+end)
+b:Button("Collect Logs",function()
+for i,v in pairs(game:GetService("Workspace").WoodCollection.WoodGroup:GetChildren()) do
+v.CFrame = game.workspace[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame-- = v.CFrame
+wait()
+end
+end)
+b:Button("Mine",function()
+game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-27.5031, -26.0311, -484.66))
+end)
+b:Button("Mine End",function()
+game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-31.6738, -26.0206, -888.12))
+end)
+

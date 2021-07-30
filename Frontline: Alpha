@@ -11,6 +11,13 @@ local section2 = page:addSection("Tools")
 section1:addTextbox("FireRate", "0.8", function(value)
     game:GetService("Players").LocalPlayer.Backpack.Rifle.Variables.FireRate.Value = value
 end)
+section1:addTextbox("AmmoPerMag", "30", function(value)
+    game:GetService("Players").LocalPlayer.Backpack.Rifle.Variables.AmmoPerMag.Value = value
+end)
+section1:addTextbox("CurrentMag", "0.8", function(value)
+    game:GetService("Players").LocalPlayer.Backpack.Rifle.Variables.FireRate.Value = value
+end)
+
 section1:addSlider("Reload Time", 0, 0, 5, function(RT)
     game:GetService("Players").LocalPlayer.Backpack.Rifle.Variables.ReloadingTime.Value = RT
 end)
@@ -26,269 +33,148 @@ end)
 ---==================================
 section2:addButton("No Build Delay", function()
     game:GetService("Players").LocalPlayer.Backpack.Build.BuildMain.Variables.WorkDelay.Value = 0
+    game:GetService("Players").LocalPlayer.Backpack.Build.BuildMain.Variables.PlacementSpeed.Value = 15
 end)
 section2:addButton("No Dismantle Delay", function()
     game:GetService("Players").LocalPlayer.Backpack.Dismantle.LocalDismantleScript.WorkDelay.Value = 0
 end)
+section2:addTextbox("Day", "2", function(value)
+    game:GetService("ReplicatedStorage").Day.Value=value
+end)
 ----==================================
-local page2 = venyx:addPage("LandShip", 5012544693)
+local page2 = venyx:addPage("Vehicles", 5012544693)
 local section3 = page2:addSection("Stats")
 local section4 = page2:addSection("AT")
-local section5 = page2:addSection("MG")
-local section6 = page2:addSection("AIMG")
 
 section3:addSlider("TurretSpeed", 1, 0, 10, function(TS)
-    game:GetService("Workspace").Vehicles.Landship.VehicleScript.VehicleController.Variables.TurretSpeed.Value = TS
+for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+    if v.Name == "TurretSpeed" then
+        v.Value = TS
+    end
+end
 end)
 section3:addSlider("TurretAimSpeed", 1, 0, 10, function(TAS)
-    game:GetService("Workspace").Vehicles.Landship.VehicleScript.VehicleController.Variables.TurretAimSpeed.Value = TAS
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "TurretAimSpeed" then
+            v.Value = TAS
+        end
+    end
 end)
 section3:addSlider("GunSpeed", 1, 0, 10, function(GS)
-    game:GetService("Workspace").Vehicles.Landship.VehicleScript.VehicleController.Variables.GunSpeed.Value = GS
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "GunSpeed" then
+            v.Value = GS
+        end
+    end
 end)
-section3:addSlider("WheelTorque", 500000, 50000, 1000000, function(WT)
-    game:GetService("Workspace").Vehicles.Landship.VehicleScript.VehicleController.Variables.WheelTorque.Value = WT
+section3:addSlider("WheelTorque", 500000, 50000, 10000000, function(WT)
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "WheelTorque" then
+            v.Value = WT
+        end
+    end
 end)
-section3:addSlider("WheelSpeed", 1, 1, 100, function(WS)
+section3:addSlider("WheelSpeed", 1, 1, 1000, function(WS)
     game:GetService("Workspace").Vehicles.Landship.VehicleScript.VehicleController.Variables.WheelSpeed.Value = WS
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "WheelSpeed" then
+            v.Value = WS
+        end
+    end
 end)
 ---==========================================--
 section4:addTextbox("FireRate", "0.8", function(value)
-    game:GetService("Workspace").Vehicles.Landship.TankAT.Variables.FireRate.Value = value
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "FireRate" then
+            v.Value = value
+        end
+    end
 end)
 section4:addSlider("AmmoPerMag", 1, 0, 10, function(APM)
-    game:GetService("Workspace").Vehicles.Landship.TankAT.Variables.AmmoPerMag.Value = APM
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "AmmoPerMag" then
+            v.Value = APM
+        end
+    end
 end)
 section4:addSlider("CurrentMag", 1, 0, 10, function(CM)
-    game:GetService("Workspace").Vehicles.Landship.TankAT.Variables.CurrentMag.Value = CM
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "CurrentMag" then
+            v.Value = CM
+        end
+    end
 end)
 section4:addSlider("ReloadingTime", 2, 0, 10, function(RT)
-    game:GetService("Workspace").Vehicles.Landship.TankAT.Variables.ReloadingTime.Value = RT
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "ReloadingTime" then
+            v.Value = RT
+        end
+    end
 end)
-section4:addSlider("CameraShake", 1, 1, 5, function(CS)
-    game:GetService("Workspace").Vehicles.Landship.TankAT.Variables.FireRate.Value = CS
+section4:addSlider("CameraShake", 1, 0, 5, function(CS)
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "CameraShake" then
+            v.Value = CS
+        end
+    end
 end)
 section4:addToggle("Automatic", false, function(value)
-    game:GetService("Workspace").Vehicles.Landship.TankAT.Variables.Automatic.Value = value
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "Automatic" then
+            v.Value = value
+        end
+    end
 end)
-------=============================================================------------
+section4:addSlider("Spread", 2, 0, 10, function(SP)
+    for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if v.Name == "Spread" then
+            v.Value = SP
+        end
+    end
+end)
+--=====================
+local page3 = venyx:addPage("Artilary", 5012544693)
+local section5 = page3:addSection("Stats")
+
 section5:addTextbox("FireRate", "0.8", function(value)
-    game:GetService("Workspace").Vehicles.Landship.TankMG.Variables.FireRate.Value = value
-end)
-section5:addSlider("AmmoPerMag", 1, 0, 100, function(APM)
-    game:GetService("Workspace").Vehicles.Landship.TankMG.Variables.AmmoPerMag.Value = APM
-end)
-section5:addSlider("CurrentMag", 1, 0, 100, function(CM)
-    game:GetService("Workspace").Vehicles.Landship.TankMG.Variables.CurrentMag.Value = CM
+    for i,v in pairs(game:GetService("Workspace").Structures:GetDescendants()) do
+        if v.Name == "FireRate" then
+            v.Value = value
+        end
+    end
 end)
 section5:addSlider("ReloadingTime", 2, 0, 10, function(RT)
-    game:GetService("Workspace").Vehicles.Landship.TankMG.Variables.ReloadingTime.Value = RT
+    for i,v in pairs(game:GetService("Workspace").Structures:GetDescendants()) do
+        if v.Name == "ReloadingTime" then
+            v.Value = RT
+        end
+    end
 end)
-section5:addSlider("Spread", 2, 0, 10, function(SP)
-    game:GetService("Workspace").Vehicles.Landship.TankMG.Variables.Spread.Value = SP
-end)
-section5:addSlider("CameraShake", 1, 1, 5, function(CS)
-    game:GetService("Workspace").Vehicles.Landship.TankMG.Variables.FireRate.Value = CS
+section5:addSlider("CameraShake", 1, 0, 5, function(CS)
+    for i,v in pairs(game:GetService("Workspace").Structures:GetDescendants()) do
+        if v.Name == "CameraShake" then
+            v.Value = CS
+        end
+    end
 end)
 section5:addToggle("Automatic", false, function(value)
-    game:GetService("Workspace").Vehicles.Landship.TankMG.Variables.Automatic.Value = value
+    for i,v in pairs(game:GetService("Workspace").Structures:GetDescendants()) do
+        if v.Name == "Automatic" then
+            v.Value = value
+        end
+    end
 end)
----=====================================--
-section6:addTextbox("FireRate", "0.8", function(value)
-    game:GetService("Workspace").Vehicles.Landship.TankAIMG.Variables.FireRate.Value = value
-end)
-section6:addSlider("AmmoPerMag", 1, 0, 100, function(APM)
-    game:GetService("Workspace").Vehicles.Landship.TankAIMG.Variables.AmmoPerMag.Value = APM
-end)
-section6:addSlider("CurrentMag", 1, 0, 100, function(CM)
-    game:GetService("Workspace").Vehicles.Landship.TankAIMG.Variables.CurrentMag.Value = CM
-end)
-section6:addSlider("ReloadingTime", 2, 0, 10, function(RT)
-    game:GetService("Workspace").Vehicles.Landship.TankAIMG.Variables.ReloadingTime.Value = RT
-end)
-section6:addSlider("Spread", 2, 0, 10, function(SP)
-    game:GetService("Workspace").Vehicles.Landship.TankAIMG.Variables.Spread.Value = SP
-end)
-section6:addSlider("CameraShake", 1, 1, 5, function(CS)
-    game:GetService("Workspace").Vehicles.Landship.TankAIMG.Variables.FireRate.Value = CS
-end)
-section6:addToggle("Automatic", false, function(value)
-    game:GetService("Workspace").Vehicles.Landship.TankAIMG.Variables.Automatic.Value = value
-end)
----============================
-local page3 = venyx:addPage("Behemoth", 5012544693)
-local section7 = page2:addSection("Stats")
-local section8 = page2:addSection("AT")
-local section9 = page2:addSection("MG")
-local section10 = page2:addSection("AIMG")
-
-section7:addSlider("TurretSpeed", 1, 0, 10, function(TS)
-    game:GetService("Workspace").Vehicles.Behemoth.VehicleScript.VehicleController.Variables.TurretSpeed.Value = TS
-end)
-section7:addSlider("TurretAimSpeed", 1, 0, 10, function(TAS)
-    game:GetService("Workspace").Vehicles.Behemoth.VehicleScript.VehicleController.Variables.TurretAimSpeed.Value = TAS
-end)
-section7:addSlider("GunSpeed", 0, 0, 10, function(GS)
-    game:GetService("Workspace").Vehicles.Behemoth.VehicleScript.VehicleController.Variables.GunSpeed.Value = GS
-end)
-section7:addSlider("WheelTorque", 500000, 50000, 1000000, function(WT)
-    game:GetService("Workspace").Vehicles.Behemoth.VehicleScript.VehicleController.Variables.WheelTorque.Value = WT
-end)
-section7:addSlider("WheelSpeed", 1, 1, 100, function(WS)
-    game:GetService("Workspace").Vehicles.Behemoth.VehicleScript.VehicleController.Variables.WheelSpeed.Value = WS
-end)
----==========================================--
-section8:addTextbox("FireRate", "0.8", function(value)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAT.Variables.FireRate.Value = value
-end)
-section8:addSlider("AmmoPerMag", 1, 0, 10, function(APM)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAT.Variables.AmmoPerMag.Value = APM
-end)
-section8:addSlider("CurrentMag", 1, 0, 10, function(CM)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAT.Variables.CurrentMag.Value = CM
-end)
-section8:addSlider("ReloadingTime", 2, 0, 10, function(RT)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAT.Variables.ReloadingTime.Value = RT
-end)
-section8:addSlider("CameraShake", 1, 1, 5, function(CS)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAT.Variables.FireRate.Value = CS
-end)
-section8:addToggle("Automatic", false, function(value)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAT.Variables.Automatic.Value = value
-end)
-------=============================================================------------
-section9:addTextbox("FireRate", "0.8", function(value)
-    game:GetService("Workspace").Vehicles.Behemoth.TankMG.Variables.FireRate.Value = value
-end)
-section9:addSlider("AmmoPerMag", 1, 0, 100, function(APM)
-    game:GetService("Workspace").Vehicles.Behemoth.TankMG.Variables.AmmoPerMag.Value = APM
-end)
-section9:addSlider("CurrentMag", 1, 0, 100, function(CM)
-    game:GetService("Workspace").Vehicles.Behemoth.TankMG.Variables.CurrentMag.Value = CM
-end)
-section9:addSlider("ReloadingTime", 2, 0, 10, function(RT)
-    game:GetService("Workspace").Vehicles.Behemoth.TankMG.Variables.ReloadingTime.Value = RT
-end)
-section9:addSlider("Spread", 2, 0, 10, function(SP)
-    game:GetService("Workspace").Vehicles.Behemoth.TankMG.Variables.Spread.Value = SP
-end)
-section9:addSlider("CameraShake", 1, 1, 5, function(CS)
-    game:GetService("Workspace").Vehicles.Behemoth.TankMG.Variables.FireRate.Value = CS
-end)
-section9:addToggle("Automatic", false, function(value)
-    game:GetService("Workspace").Vehicles.Behemoth.TankMG.Variables.Automatic.Value = value
-end)
----=====================================--
-section10:addTextbox("FireRate", "0.8", function(value)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAIMG.Variables.FireRate.Value = value
-end)
-section10:addSlider("AmmoPerMag", 1, 0, 100, function(APM)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAIMG.Variables.AmmoPerMag.Value = APM
-end)
-section10:addSlider("CurrentMag", 1, 0, 100, function(CM)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAIMG.Variables.CurrentMag.Value = CM
-end)
-section10:addSlider("ReloadingTime", 2, 0, 10, function(RT)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAIMG.Variables.ReloadingTime.Value = RT
-end)
-section10:addSlider("Spread", 2, 0, 10, function(SP)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAIMG.Variables.Spread.Value = SP
-end)
-section10:addSlider("CameraShake", 1, 1, 5, function(CS)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAIMG.Variables.FireRate.Value = CS
-end)
-section10:addToggle("Automatic", false, function(value)
-    game:GetService("Workspace").Vehicles.Behemoth.TankAIMG.Variables.Automatic.Value = value
-end)
----==========================================
-local page4 = venyx:addPage("Medium Tank", 5012544693)
-local section11 = page2:addSection("Stats")
-local section12 = page2:addSection("AT")
-local section13 = page2:addSection("MG")
-local section14 = page2:addSection("AIMG")
-
-section11:addSlider("TurretSpeed", 1, 0, 10, function(TS)
-    game:GetService("Workspace").Vehicles.MediumTank.VehicleScript.VehicleController.Variables.TurretSpeed.Value = TS
-end)
-section11:addSlider("TurretAimSpeed", 0, 0, 10, function(TAS)
-    game:GetService("Workspace").Vehicles.MediumTank.VehicleScript.VehicleController.Variables.TurretAimSpeed.Value = TAS
-end)
-section11:addSlider("GunSpeed", 0, 0, 10, function(GS)
-    game:GetService("Workspace").Vehicles.MediumTank.VehicleScript.VehicleController.Variables.GunSpeed.Value = GS
-end)
-section11:addSlider("WheelTorque", 500000, 50000, 1000000, function(WT)
-    game:GetService("Workspace").Vehicles.MediumTank.VehicleScript.VehicleController.Variables.WheelTorque.Value = WT
-end)
-section11:addSlider("WheelSpeed", 1, 1, 100, function(WS)
-    game:GetService("Workspace").Vehicles.MediumTank.VehicleScript.VehicleController.Variables.WheelSpeed.Value = WS
-end)
----==========================================--
-section12:addTextbox("FireRate", "0.8", function(value)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAT.Variables.FireRate.Value = value
-end)
-section12:addSlider("AmmoPerMag", 1, 0, 10, function(APM)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAT.Variables.AmmoPerMag.Value = APM
-end)
-section12:addSlider("CurrentMag", 1, 0, 10, function(CM)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAT.Variables.CurrentMag.Value = CM
-end)
-section12:addSlider("ReloadingTime", 2, 0, 10, function(RT)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAT.Variables.ReloadingTime.Value = RT
-end)
-section12:addSlider("CameraShake", 1, 1, 5, function(CS)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAT.Variables.FireRate.Value = CS
-end)
-section12:addToggle("Automatic", false, function(value)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAT.Variables.Automatic.Value = value
-end)
-------=============================================================------------
-section13:addTextbox("FireRate", "0.8", function(value)
-    game:GetService("Workspace").Vehicles.MediumTank.TankMG.Variables.FireRate.Value = value
-end)
-section13:addSlider("AmmoPerMag", 1, 0, 100, function(APM)
-    game:GetService("Workspace").Vehicles.MediumTank.TankMG.Variables.AmmoPerMag.Value = APM
-end)
-section13:addSlider("CurrentMag", 1, 0, 100, function(CM)
-    game:GetService("Workspace").Vehicles.MediumTank.TankMG.Variables.CurrentMag.Value = CM
-end)
-section13:addSlider("ReloadingTime", 2, 0, 10, function(RT)
-    game:GetService("Workspace").Vehicles.MediumTank.TankMG.Variables.ReloadingTime.Value = RT
-end)
-section13:addSlider("Spread", 2, 0, 10, function(SP)
-    game:GetService("Workspace").Vehicles.MediumTank.TankMG.Variables.Spread.Value = SP
-end)
-section13:addSlider("CameraShake", 1, 1, 5, function(CS)
-    game:GetService("Workspace").Vehicles.MediumTank.TankMG.Variables.FireRate.Value = CS
-end)
-section13:addToggle("Automatic", false, function(value)
-    game:GetService("Workspace").Vehicles.MediumTank.TankMG.Variables.Automatic.Value = value
-end)
----=====================================--
-section14:addTextbox("FireRate", "0.8", function(value)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAIMG.Variables.FireRate.Value = value
-end)
-section14:addSlider("AmmoPerMag", 1, 0, 100, function(APM)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAIMG.Variables.AmmoPerMag.Value = APM
-end)
-section14:addSlider("CurrentMag", 1, 0, 100, function(CM)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAIMG.Variables.CurrentMag.Value = CM
-end)
-section14:addSlider("ReloadingTime", 2, 0, 10, function(RT)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAIMG.Variables.ReloadingTime.Value = RT
-end)
-section14:addSlider("Spread", 2, 0, 10, function(SP)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAIMG.Variables.Spread.Value = SP
-end)
-section14:addSlider("CameraShake", 1, 1, 5, function(CS)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAIMG.Variables.FireRate.Value = CS
-end)
-section14:addToggle("Automatic", false, function(value)
-    game:GetService("Workspace").Vehicles.MediumTank.TankAIMG.Variables.Automatic.Value = value
+section5:addSlider("Spread", 2, 0, 10, function(SP)
+    for i,v in pairs(game:GetService("Workspace").Structures:GetDescendants()) do
+        if v.Name == "Spread" then
+            v.Value = SP
+        end
+    end
 end)
 --==========================
 local page5 = venyx:addPage("Settings and Credits", 5012544693)
-local section15 = page2:addSection("Settings")
-local section16 = page2:addSection("AT")
+local section15 = page5:addSection("Settings")
+local section16 = page5:addSection("Credits")
 
 section15:addKeybind("Toggle Keybind", Enum.KeyCode.RightControl, function()
     venyx:toggle()
@@ -302,8 +188,8 @@ end)
 section16:addButton("UI Thread", function()
     setclipboard("https://v3rmillion.net/showthread.php?pid=7233501#pid7233501")
 end)
-section16:addButton("This Release", function()
-    --setclipboard()
+section16:addButton("This GUI", function()
+    setclipboard("https://v3rmillion.net/showthread.php?tid=1129016")
 end)
 -- load
 venyx:SelectPage(venyx.pages[1], true)

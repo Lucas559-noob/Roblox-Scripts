@@ -132,14 +132,14 @@ Tab3:AddButton({
   	end    
 })
 Tab3:AddButton({
-	Name = "Delete Glass"
+	Name = "Delete Glass",
 	Callback = function()
-	for i,v in pairs(game:GetService("Workspace").Glass:GetChildren()) do
-if v.Name == 'Glass' then
-v:Destroy()
-end
-end
+        for i,v in pairs(game:GetService("Workspace").Glass:GetChildren()) do
+            if v.Name == 'Glass' then
+            v:Destroy()
+            end
+        end
+  	end    
 })
-
 
 OrionLib:Init()

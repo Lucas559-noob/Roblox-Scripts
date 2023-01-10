@@ -12,10 +12,8 @@ local Section = Tab:AddSection({
 	Name = "Interaction"
 })
 
-local k1I=Tab:AddBind({
+local k1I=Tab:AddButton({
 	Name = "Interact",
-	Default = Enum.KeyCode.T,
-	Hold = false,
 	Callback = function()
  game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
     prompt.HoldDuration = 0

@@ -13,7 +13,7 @@ local Section = Tab:AddSection({
 })
 
 local k1I=Tab:AddButton({
-	Name = "Interact",
+	Name = "Instant Interact",
 	Callback = function()
  game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
     prompt.HoldDuration = 0

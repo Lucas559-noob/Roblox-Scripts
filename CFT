@@ -1,1 +1,115 @@
-uwu
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Car Factory Tycoon", HidePremium = false, SaveConfig = false, ConfigFolder = "CFT"})
+
+--[[Local Storage]]
+local Factory = tostring(game.Players.LocalPlayer.Team)
+local conveyors
+local Tab = Window:MakeTab({
+	Name = "Farming",
+	Icon = "rbxassetid://1205680569", --1205680569
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+
+local Section = Tab:AddSection({
+	Name = "Fill"
+})
+
+--[[
+Name = <string> - The name of the section.
+]]
+
+Tab:AddToggle({
+	Name = "Fill",
+	Default = false,
+	Callback = function(Value)
+--collect
+getgenv().Fill = Value
+if getgenv().Fill == true then
+for i,v in pairs(game:GetService("Workspace").Tycoons[Factory].Model.Lines:GetChildren()) do
+if v.Name ~= 'Exclusive' then
+conveyors = v
+print(conveyors)
+end
+for i = 1,8 do
+game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.Collect:InvokeServer('Glass')
+game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.Collect:InvokeServer('Metal')
+--Conveyors
+
+game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.Drop:InvokeServer(conveyors)
+end
+end
+end
+end    
+})
+
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+local Section = Tab:AddSection({
+	Name = "Cars"
+})
+
+Tab:AddToggle({
+	Name = "Create Car",
+	Default = false,
+	Callback = function(Value)
+--Create car
+getgenv().CC = Value
+if getgenv().CC == true then
+for i = 1,5 do
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.TycoonService.RF.SpawnCarSegment:InvokeServer(conveyors)
+    wait()
+    end
+    --place wheel
+for i = 1,4 do
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.CollectWheel:InvokeServer(conveyors)
+    
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RE.PlaceWheel:FireServer(conveyors)
+    end
+end
+end
+})
+
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+local Section = Tab:AddSection({
+	Name = "Sell"
+})
+
+Tab:AddToggle({
+	Name = "AutoSell",
+	Default = false,
+	Callback = function(Value)
+--sell
+getgenv().AutoSell = Value
+if getgenv().AutoSell == true then
+for i,v in pairs(game:GetService("Workspace").Tycoons[Factory].Model.NPCs:GetChildren()) do
+    local ohInstance1 = v 
+    local ohString2 = math.random(1,3)
+    
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.TycoonService.RF.AcceptBid:InvokeServer(ohInstance1, ohString2)
+    end
+end    
+end
+})
+
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
+
+OrionLib:Init()

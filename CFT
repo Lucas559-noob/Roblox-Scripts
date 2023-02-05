@@ -18,17 +18,13 @@ local Tab = Window:MakeTab({
 	PremiumOnly = false
 })
 
---[[
-Name = <string> - The name of the tab.
-Icon = <string> - The icon of the tab.
-PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
-]]
 
 local Section = Tab:AddSection({
 	Name = "Fill"
 })
 Tab:AddLabel("What this do?")
 	Tab:AddParagraph("Fill","It grabs 'Metal' and 'Glass' from the pile and adds to every conveyor until the other part explained bellow")
+	Tab:AddParagraph("Requirements","Be able to carry 2 items at same time")
 
 	Tab:AddLabel("Why this Slider?")
 	Tab:AddParagraph("Welcome to the Slider","This will be the number of your last conveyor, from 1 to 8(next game updates it probably will expand)")
@@ -48,10 +44,22 @@ Tab:AddSlider({
 	--	print(Value)
 	end    
 })
+local wor
+Tab:AddParagraph("How many workers do you have on last conveyor?","This is to prevent the bug of car getting stuck")
+Tab:AddSlider({
+	Name = "Last Conveyor Workers",
+	Min = 0,
+	Max = 5,
+	Default = 0,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	--ValueName = "bananas",
+	Callback = function(Value)
+wor = Value
+	end    
+})
 
---[[
-Name = <string> - The name of the section.
-]]
+
 
 Tab:AddToggle({
 	Name = "Fill",
@@ -76,11 +84,6 @@ end
 end
 })
 
---[[
-Name = <string> - The name of the toggle.
-Default = <bool> - The default value of the toggle.
-Callback = <function> - The function of the toggle.
-]]
 
 local Section = Tab:AddSection({
 	Name = "Cars"
@@ -90,15 +93,6 @@ Tab:AddParagraph("Its a checkbox(a loop)","It will complete 5 steps(of 6) and on
 Tab:AddParagraph("Automation","To be able to make it don't get stuck, you will need to have this autofarm enabled with autosell")
 Tab:AddParagraph("Full Automation Problems","Since you need to have a supply, you can't supply and carry wheels at same time, so its impossible to do both at same time(unless someone fork and do a pull request to solve this :D)")
 
---[[
-Name = <string> - The name of the slider.
-Min = <number> - The minimal value of the slider.
-Max = <number> - The maxium value of the slider.
-Increment = <number> - How much the slider will change value when dragging.
-Default = <number> - The default value of the slider.
-ValueName = <string> - The text after the value number.
-Callback = <function> - The function of the slider.
-]]
 
 Tab:AddToggle({
 	Name = "Create Car",
@@ -109,7 +103,7 @@ getgenv().CC = Value
 if getgenv().CC == true then
 	repeat
 		wait(3)--Anti Stucker on car spawn
-for i = 1,5 do
+for i = wor,4 do
     game:GetService("ReplicatedStorage").Packages.Knit.Services.TycoonService.RF.SpawnCarSegment:InvokeServer(linha)
     --game:GetService("ReplicatedStorage").Packages.Knit.Services.TycoonService.RF.SpawnCarSegment:InvokeServer(conv)
     end
@@ -130,23 +124,11 @@ end
 		Time = 10
 	})
 	
-	--[[
-	Title = <string> - The title of the notification.
-	Content = <string> - The content of the notification.
-	Image = <string> - The icon of the notification.
-	Time = <number> - The duration of the notfication.
-	]]
 end
 end
 })
 
 
---})
---[[
-Name = <string> - The name of the toggle.
-Default = <bool> - The default value of the toggle.
-Callback = <function> - The function of the toggle.
-]]
 
 local Section = Tab:AddSection({
 	Name = "Sell"
@@ -175,11 +157,6 @@ end
 end
 })
 
---[[
-Name = <string> - The name of the toggle.
-Default = <bool> - The default value of the toggle.
-Callback = <function> - The function of the toggle.
-]]
 
 
 
@@ -275,6 +252,59 @@ Tab:AddButton({
 })
 
 
+local Section = Tab:AddSection({
+	Name = "Teleports"
+})
+local car
+Tab:AddTextbox({
+	Name = "Car Name",
+	Default = "Write your car name, the same on Car Dealership",
+	TextDisappear = false,
+	Callback = function(Value)
+	car = Value
+	end	  
+})
+local time
+Tab:AddSlider({
+	Name = "Time",
+	Min = 20,
+	Max = 90,
+	Default = 21,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	--ValueName = "bananas",
+	Callback = function(Value)
+time = Value
+	end    
+})
+
+Tab:AddParagraph("Time Trial","There is a kick if going under 20 seconds")
+Tab:AddButton({
+	Name = "Trigger Time Trial and teleport to Finish Line",
+	Callback = function()
+		--car = 'Tiny Cooper'
+		local carro 
+		 
+		local A_1 = "TimeTrial"
+		local Event = game:GetService("ReplicatedStorage").Packages.Knit.Services.EventService.RF.StartEvent
+		Event:InvokeServer(A_1)
+		
+		wait(time)
+		for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+		if v.Name == car then
+		carro = v 
+		warn(v)
+		end
+		end
+		for a,t in pairs(carro:GetDescendants()) do
+		if t:IsA('Part') then
+		--t.CFrame = game:GetService("Workspace").TimeTrial.Start.CFrame
+		t.CFrame = game:GetService("Workspace").TimeTrial.Finish.CFrame
+		end
+		end  	
+	end    
+})
+
 
 local Tab = Window:MakeTab({
 	Name = "Credits",
@@ -282,11 +312,6 @@ local Tab = Window:MakeTab({
 	PremiumOnly = false
 })
 
---[[
-Name = <string> - The name of the tab.
-Icon = <string> - The icon of the tab.
-PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
-]]
 Tab:AddLabel("Scripts")
 Tab:AddParagraph("Me","Mod Cars, AutoFarm stuff, etc")
 Tab:AddLabel("Orion Library")
@@ -297,20 +322,17 @@ local Tab = Window:MakeTab({
 	Icon = "rbxassetid://4834592491",
 	PremiumOnly = false
 })
-
 local Section = Tab:AddSection({
+	Name = "05/02/2023"
+})
+Tab:AddParagraph("Teleports","Added a teleport to finish line on Time Trial")
+
+--[[
+Name = <string> - The name of the section.
+]]local Section = Tab:AddSection({
 	Name = "04/02/2023 DD/MM/YYYY"
 })
 Tab:AddParagraph("Its alive!","Started adding the autofarm and mod car.")--pain, took me over 8 hours to fix and test stuff, since i'm not an expert when working on UI Libs
 
---[[
-Name = <string> - The name of the section.
-]]
-
---[[
-Name = <string> - The name of the tab.
-Icon = <string> - The icon of the tab.
-PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
-]]
 
 OrionLib:Init()

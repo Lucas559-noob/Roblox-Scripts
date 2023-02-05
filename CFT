@@ -162,7 +162,7 @@ end
 
 
 local Tab = Window:MakeTab({
-	Name = "Personal Vehicle",
+	Name = "Car and Teleports",
 	Icon = "rbxassetid://8177115582",
 	PremiumOnly = false
 })
@@ -305,6 +305,30 @@ Tab:AddButton({
 	end    
 })
 
+Tab:AddButton({
+	Name = "Bring Race Checkpoints",
+	Callback = function()
+local lp = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+for i,v in pairs(game:GetService("Workspace").Race.Checkpoints:GetChildren()) do
+v.CFrame = lp
+end
+  	end    
+})
+
+Tab:AddParagraph("Patches of game","You can only collect after it hit the floor/ground")
+Tab:AddButton({
+	Name = "AirDrop",
+	Callback = function()
+local old = game:GetService("Workspace")[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame
+game:GetService("Workspace")[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame = game:GetService("Workspace").World.AirDrops.Drops.AirDrop.Base.CFrame
+wait()
+game:GetService("Workspace")[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame = old  	end    
+})
+
+--[[
+Name = <string> - The name of the button.
+Callback = <function> - The function of the button.
+]]
 
 local Tab = Window:MakeTab({
 	Name = "Credits",
@@ -325,7 +349,7 @@ local Tab = Window:MakeTab({
 local Section = Tab:AddSection({
 	Name = "05/02/2023"
 })
-Tab:AddParagraph("Teleports","Added a teleport to finish line on Time Trial")
+Tab:AddParagraph("Teleports","Added a teleport to finish line on Time Trial, Bring checkpoints of race and teleport to airdrop")
 
 --[[
 Name = <string> - The name of the section.

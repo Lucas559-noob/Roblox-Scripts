@@ -32,7 +32,7 @@ Tab:AddLabel("What this do?")
 Tab:AddSlider({
 	Name = "Last Conveyor",
 	Min = 1,
-	Max = 8,
+	Max = 12,
 	Default = 1,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
@@ -58,7 +58,16 @@ Tab:AddSlider({
 wor = Value
 	end    
 })
+local InvF
+Tab:AddParagraph("Will invert the order to fill","Instead from first conveyor, it will start from the last conveyor")
 
+Tab:AddToggle({
+	Name = "Invert Fill",
+	Default = false,
+	Callback = function(Value)
+		InvF = Value
+	end
+	})
 
 
 Tab:AddToggle({
@@ -74,14 +83,20 @@ game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.C
 game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.Collect:InvokeServer('Metal')
 
 --Conveyors
+if InvF == false then
 for i = 1, CV do
+end
+else
+	for i= CV, 1, -1 do
 local PLR = ('Conveyor'..i)
 wait()
 game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.Drop:InvokeServer(PL.Parent[PLR])
 end
+end
 until getgenv().Fill == false
 end
 end
+
 })
 
 
@@ -267,18 +282,18 @@ Tab:AddTextbox({
 local time
 Tab:AddSlider({
 	Name = "Time",
-	Min = 20,
-	Max = 90,
+	Min = 10,
+	Max = 60,
 	Default = 21,
 	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
+	Increment = 0.25,
 	--ValueName = "bananas",
 	Callback = function(Value)
 time = Value
 	end    
 })
 
-Tab:AddParagraph("Time Trial","There is a kick if going under 20 seconds")
+Tab:AddParagraph("Time Trial","There is a kick if going way lower of time show in leaderboard")
 Tab:AddButton({
 	Name = "Trigger Time Trial and teleport to Finish Line",
 	Callback = function()
@@ -346,6 +361,11 @@ local Tab = Window:MakeTab({
 	Icon = "rbxassetid://4834592491",
 	PremiumOnly = false
 })
+local Section = Tab:AddSection({
+	Name = "11/02/2023"
+})
+Tab:AddParagraph("Updated for Off-Road update","Increased conveyors, time to teleport in time trial, invert fill")
+
 local Section = Tab:AddSection({
 	Name = "05/02/2023"
 })

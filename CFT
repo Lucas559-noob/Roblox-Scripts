@@ -85,6 +85,9 @@ game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.C
 --Conveyors
 if InvF == false then
 for i = 1, CV do
+	local PLR = ('Conveyor'..i)
+wait()
+game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.Drop:InvokeServer(PL.Parent[PLR])
 end
 else
 	for i= CV, 1, -1 do
@@ -96,7 +99,6 @@ end
 until getgenv().Fill == false
 end
 end
-
 })
 
 
@@ -171,9 +173,6 @@ until getgenv().AutoSell == false
 end    
 end
 })
-
-
-
 
 
 local Tab = Window:MakeTab({
@@ -340,10 +339,6 @@ wait()
 game:GetService("Workspace")[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame = old  	end    
 })
 
---[[
-Name = <string> - The name of the button.
-Callback = <function> - The function of the button.
-]]
 
 local Tab = Window:MakeTab({
 	Name = "Credits",
@@ -362,6 +357,11 @@ local Tab = Window:MakeTab({
 	PremiumOnly = false
 })
 local Section = Tab:AddSection({
+	Name = "25/02/2023"
+})
+Tab:AddParagraph("Fixed Normal Fill","Two weeks ago and I only tested on Inverted Fill")
+
+local Section = Tab:AddSection({
 	Name = "11/02/2023"
 })
 Tab:AddParagraph("Updated for Off-Road update","Increased conveyors, time to teleport in time trial, invert fill")
@@ -371,9 +371,7 @@ local Section = Tab:AddSection({
 })
 Tab:AddParagraph("Teleports","Added a teleport to finish line on Time Trial, Bring checkpoints of race and teleport to airdrop")
 
---[[
-Name = <string> - The name of the section.
-]]local Section = Tab:AddSection({
+local Section = Tab:AddSection({
 	Name = "04/02/2023 DD/MM/YYYY"
 })
 Tab:AddParagraph("Its alive!","Started adding the autofarm and mod car.")--pain, took me over 8 hours to fix and test stuff, since i'm not an expert when working on UI Libs

@@ -281,7 +281,7 @@ Tab:AddTextbox({
 local time
 Tab:AddSlider({
 	Name = "Time",
-	Min = 10,
+	Min = 3,
 	Max = 60,
 	Default = 21,
 	Color = Color3.fromRGB(255,255,255),
@@ -356,6 +356,11 @@ local Tab = Window:MakeTab({
 	Icon = "rbxassetid://4834592491",
 	PremiumOnly = false
 })
+local Section = Tab:AddSection({
+	Name = "18/03/2023"
+})
+Tab:AddParagraph("Time Trial Changed","Decreased minimal time to 3 seconds")
+
 local Section = Tab:AddSection({
 	Name = "25/02/2023"
 })

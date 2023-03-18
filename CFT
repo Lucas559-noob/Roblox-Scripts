@@ -1,3 +1,12 @@
+warn([[ 
+________  ________ _________        ________  ___  ___  ___     
+|\   ____\|\  _____\\___   ___\     |\   ____\|\  \|\  \|\  \    
+\ \  \___|\ \  \__/\|___ \  \_|     \ \  \___|\ \  \\\  \ \  \   
+ \ \  \    \ \   __\    \ \  \       \ \  \  __\ \  \\\  \ \  \  
+  \ \  \____\ \  \_|     \ \  \       \ \  \|\  \ \  \\\  \ \  \ 
+   \ \_______\ \__\       \ \__\       \ \_______\ \_______\ \__\
+    \|_______|\|__|        \|__|        \|_______|\|_______|\|__|
+                    By lucasgauer True_Gamer#4959      ]])
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "Car Factory Tycoon", HidePremium = false, SaveConfig = false, ConfigFolder = "CFT"})
 

@@ -62,7 +62,7 @@ local InvF
 Tab:AddParagraph("Will invert the order to fill","Instead from first conveyor, it will start from the last conveyor")
 
 Tab:AddToggle({
-	Name = "Invert Fill",
+	Name = "Invert Fill[LEGACY]",
 	Default = false,
 	Callback = function(Value)
 		InvF = Value
@@ -71,7 +71,7 @@ Tab:AddToggle({
 
 
 Tab:AddToggle({
-	Name = "Fill",
+	Name = "Fill[LEGACY]",
 	Default = false,
 	Callback = function(Value)
 --collect
@@ -100,15 +100,38 @@ until getgenv().Fill == false
 end
 end
 })
+--Cool Fill
+local function autoFillConveyors()
+	local numConveyors = CV
+	local conv = 1
 
+	for i = 1, numConveyors do
+		local conveyorName = 'Conveyor'..conv
+		warn(conveyorName) 
+		local A_1 = conveyorName
+		local Event = game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.AutoFill
+		Event:InvokeServer(A_1)
+		conv = conv + 1
+	end
+end
+Tab:AddParagraph("Better Autofill", "If you want to make your farm fully automated without any issues, use this autofill instead of the LEGACY one. It will allow you to complete all steps, including placing wheels, without breaking the flow. This is because you cannot carry both supply items and wheels at the same time.")
+Tab:AddParagraph("Warning", "May require a supplier worker(the first cost 750 gems on first building)")
+Tab:AddToggle({
+	Name = "Auto Fill Conveyors",
+	Default = false,
+	Callback = function(Value)
+		if Value then
+			autoFillConveyors()
+		end
+	end
+})
 
 local Section = Tab:AddSection({
 	Name = "Cars"
 })
-Tab:AddLabel("And about this one?")
 Tab:AddParagraph("Its a checkbox(a loop)","It will complete 5 steps(of 6) and on the last it will place wheels(instead of using the same remote to skip building parts)")
 Tab:AddParagraph("Automation","To be able to make it don't get stuck, you will need to have this autofarm enabled with autosell")
-Tab:AddParagraph("Full Automation Problems","Since you need to have a supply, you can't supply and carry wheels at same time, so its impossible to do both at same time(unless someone fork and do a pull request to solve this :D)")
+Tab:AddParagraph("Full Automation Problems","Please note that if you are currently using scripts with 'LEGACY' in the name, they may not work as expected with the full automation feature. In this case, you can try using the other autofill option instead")
 
 
 Tab:AddToggle({
@@ -360,6 +383,7 @@ local Section = Tab:AddSection({
 	Name = "18/03/2023"
 })
 Tab:AddParagraph("Time Trial Changed","Decreased minimal time to 3 seconds")
+Tab:AddParagraph("Added a better autofill","It uses an remote, but probably require a worker that fills, also made other autofills LEGACY")
 
 local Section = Tab:AddSection({
 	Name = "25/02/2023"

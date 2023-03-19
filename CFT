@@ -116,7 +116,7 @@ local function autoFillConveyors()
 
 	for i = 1, numConveyors do
 		local conveyorName = 'Conveyor'..conv
-		warn(conveyorName) 
+		--warn(conveyorName) 
 		local A_1 = conveyorName
 		local Event = game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.AutoFill
 		Event:InvokeServer(A_1)

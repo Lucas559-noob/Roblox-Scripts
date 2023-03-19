@@ -132,7 +132,7 @@ Tab:AddToggle({
 		getgenv().AutoFill = Value
 		if getgenv().AutoFill == true then
 			while getgenv().AutoFill == true do
-				autoFillConveyors()
+				adutoFillConveyors()
 				wait(5)
 			end
 		end
@@ -156,18 +156,19 @@ Tab:AddToggle({
 getgenv().CC = Value
 if getgenv().CC == true then
 	repeat
-		wait(3)--Anti Stucker on car spawn
+		wait(1)--Anti Stucker on car spawn
 for i = wor,4 do
     game:GetService("ReplicatedStorage").Packages.Knit.Services.TycoonService.RF.SpawnCarSegment:InvokeServer(linha)
     --game:GetService("ReplicatedStorage").Packages.Knit.Services.TycoonService.RF.SpawnCarSegment:InvokeServer(conv)
     end
     --place wheel
 	wait(1)
-for i = 1,4 do
+for i = 1,8 do
     game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.CollectWheel:InvokeServer(linha)
 --    game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.CollectWheel:InvokeServer(conv)
-    
     game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RE.PlaceWheel:FireServer(linha)
+	wait()
+	game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.Dispose:InvokeServer()
 end
 	--wait(3)
 	until getgenv().CC == false or getgenv().AutoSell == false

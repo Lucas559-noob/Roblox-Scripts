@@ -132,7 +132,7 @@ Tab:AddToggle({
 		getgenv().AutoFill = Value
 		if getgenv().AutoFill == true then
 			while getgenv().AutoFill == true do
-				adutoFillConveyors()
+				autoFillConveyors()
 				wait(5)
 			end
 		end

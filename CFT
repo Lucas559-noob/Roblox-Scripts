@@ -156,13 +156,13 @@ Tab:AddToggle({
 getgenv().CC = Value
 if getgenv().CC == true then
 	repeat
-		wait(1)--Anti Stucker on car spawn
+		wait()--Anti Stucker on car spawn
 for i = wor,4 do
     game:GetService("ReplicatedStorage").Packages.Knit.Services.TycoonService.RF.SpawnCarSegment:InvokeServer(linha)
     --game:GetService("ReplicatedStorage").Packages.Knit.Services.TycoonService.RF.SpawnCarSegment:InvokeServer(conv)
     end
     --place wheel
-	wait(1)
+	wait()
 for i = 1,8 do
     game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.CollectWheel:InvokeServer(linha)
 --    game:GetService("ReplicatedStorage").Packages.Knit.Services.MaterialService.RF.CollectWheel:InvokeServer(conv)

@@ -126,14 +126,19 @@ end
 Tab:AddParagraph("Better Autofill", "If you want to make your farm fully automated without any issues, use this autofill instead of the LEGACY one. It will allow you to complete all steps, including placing wheels, without breaking the flow. This is because you cannot carry both supply items and wheels at the same time.")
 Tab:AddParagraph("Warning", "May require a supplier worker(the first cost 750 gems on first building)")
 Tab:AddToggle({
-	Name = "Auto Fill Conveyors",
+	Name = "Autofill",
 	Default = false,
 	Callback = function(Value)
-		if Value then
-			autoFillConveyors()
+		getgenv().AutoFill = Value
+		if getgenv().AutoFill == true then
+			while getgenv().AutoFill == true do
+				autoFillConveyors()
+				wait(5)
+			end
 		end
 	end
 })
+
 
 local Section = Tab:AddSection({
 	Name = "Cars"
@@ -382,12 +387,20 @@ Tab:AddLabel("Scripts")
 Tab:AddParagraph("Me","Mod Cars, AutoFarm stuff, etc")
 Tab:AddLabel("Orion Library")
 Tab:AddParagraph("shlexware","On Github")
+Tab:AddLabel("Text Improvements")
+Tab:AddParagraph("ChatGPT","https://openai.com/chatgpt")
+
 
 local Tab = Window:MakeTab({
 	Name = "Changelog",
 	Icon = "rbxassetid://4834592491",
 	PremiumOnly = false
 })
+local Section = Tab:AddSection({
+	Name = "19/03/2023"
+})
+Tab:AddParagraph("Update of Autofill","Made it loop")
+
 local Section = Tab:AddSection({
 	Name = "18/03/2023"
 })

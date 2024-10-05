@@ -1,13 +1,13 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-    Name = "Rayfield Example Window",
-    LoadingTitle = "Rayfield Interface Suite",
-    LoadingSubtitle = "by Sirius",
+    Name = "Run on the Moon",
+    LoadingTitle = "RotM Basic Teleport",
+    LoadingSubtitle = "by True Gamer",
     ConfigurationSaving = {
        Enabled = false,
        FolderName = nil,
-       FileName = "Big Hub"
+       FileName = "RotM"
     },
     Discord = {
        Enabled = false,
@@ -62,7 +62,7 @@ local function onMouseClick()
                 
                 if vehicleFolder and vehicleFolder:IsDescendantOf(workspace.Vehicles) then
                     _G.CurrentVehicleCode = vehicleFolder.Name -- Set global variable
-                    print("Your vehicle code is: " .. _G.CurrentVehicleCode)
+                    --print("Your vehicle code is: " .. _G.CurrentVehicleCode)
                 else
                     print("Vehicle not found or not under Vehicles folder.")
                 end

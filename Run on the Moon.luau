@@ -76,6 +76,37 @@ end
 -- Connect the mouse click event
 mouse.Button1Down:Connect(onMouseClick)
 
+local function onMouseClick()
+    if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then -- Check if Ctrl is pressed
+        local target = mouse.Target -- Get the clicked object
+
+        if target then
+            -- Check if the clicked object is a vehicle part
+            local vehiclePart = target:FindFirstAncestor("VehicleParts") -- Check for VehicleParts folder
+            if vehiclePart then
+                -- Find the parent vehicle (the folder containing the vehicle code)
+                local vehicleFolder = vehiclePart:FindFirstAncestorWhichIsA("Model") -- Get the nearest Model ancestor (the vehicle)
+                    _G.CurrentTrailerCode = nil -- Initialize global variable
+                -- Inside your onMouseClick function:
+                if vehicleFolder and vehicleFolder:IsDescendantOf(workspace.Trailers) then
+                    _G.CurrentTrailerCode = vehicleFolder.Name -- Set global variable
+                    print("Your trailer code is: " .. _G.CurrentTrailerCode)
+
+                    --print("Your vehicle code is: " .. vehicleCode) -- Output the vehicle code
+                else
+                    print("Trailer not found or not under Trailer folder.")
+                end
+            else
+                print("You clicked on a non-trailer object.")
+            end
+        end
+    end
+end
+
+-- Connect the function to the mouse click event
+mouse.Button1Down:Connect(onMouseClick)
+
+
 local positions = {X = 0, Y = 0, Z = 0}
 local Tab = Window:CreateTab("Teleport", 4483362458)
 local Section = Tab:CreateSection("Position")
@@ -126,6 +157,27 @@ local Button = Tab:CreateButton({
             print("No vehicle code is stored.")
         end
     end,
+})
+
+local Button = Tab:CreateButton({
+    Name = "Teleport Trailer",
+    Callback = function()
+        local vehicleCode = _G.CurrentTrailerCode -- Retrieve the vehicle code from _G
+            local targetPosition = Vector3.new(positions.X+30, positions.Y, positions.Z+30) -- Change this to your desired coordinates
+
+        if vehicleCode then
+            local vehicleModel = workspace.Trailers:FindFirstChild(vehicleCode)
+            if vehicleModel then
+                vehicleModel:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+        
+                print("Teleported trailer " .. vehicleCode .. " to " .. tostring(targetPosition))
+            else
+                print("Trailer model not found for code: " .. vehicleCode)
+            end
+        else
+            print("No trailer code is stored.")
+        end
+    end
 })
 
 

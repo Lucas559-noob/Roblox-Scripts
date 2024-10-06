@@ -48,33 +48,42 @@ local UserInputService = game:GetService("UserInputService")
 
 _G.CurrentVehicleCode = nil -- Initialize global variable
 
--- Function to handle mouse click
-local function onMouseClick()
-    if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then -- Check if Ctrl is pressed
-        local target = mouse.Target -- Get the clicked object
+local player = game.Players.LocalPlayer
 
-        if target then
-            -- Check if the clicked object is a vehicle part
-            local vehiclePart = target:FindFirstAncestor("VehicleParts")
-            if vehiclePart then
-                -- Find the parent vehicle (the folder containing the vehicle code)
-                local vehicleFolder = vehiclePart:FindFirstAncestorWhichIsA("Model")
-                
-                if vehicleFolder and vehicleFolder:IsDescendantOf(workspace.Vehicles) then
-                    _G.CurrentVehicleCode = vehicleFolder.Name -- Set global variable
-                    --print("Your vehicle code is: " .. _G.CurrentVehicleCode)
-                else
-                    print("Vehicle not found or not under Vehicles folder.")
-                end
+-- Function to handle seat checking
+local function setupSeatCheck(character)
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Function to check the seat and print parent of the grandparent
+    local function checkSeat()
+        if humanoid.SeatPart then
+            local seat = humanoid.SeatPart
+            if seat.Parent and seat.Parent.Parent and seat.Parent.Parent.Parent then
+                local seatGreatGrandParent = seat.Parent.Parent.Parent  -- Get the parent of the grandparent
+              --  print("Parent of the grandparent:", seatGreatGrandParent.Name)
+                _G.CurrentVehicleCode = seatGreatGrandParent.Name
             else
-                print("You clicked on a non-vehicle object.")
+                --print("Seat has no parent of grandparent.")
             end
+        else
+            --print("Character is not seated.")
         end
     end
+    
+    -- Connect the SeatPart changed event to detect when the character sits or leaves a seat
+    humanoid:GetPropertyChangedSignal("SeatPart"):Connect(checkSeat)
+    
+    -- Check seat immediately if the player is already seated
+    checkSeat()
 end
 
--- Connect the mouse click event
-mouse.Button1Down:Connect(onMouseClick)
+-- Set up the seat check for the current character
+if player.Character then
+    setupSeatCheck(player.Character)
+end
+
+-- Listen for when the character respawns
+player.CharacterAdded:Connect(setupSeatCheck)
 
 local function onMouseClick()
     if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then -- Check if Ctrl is pressed
@@ -149,7 +158,7 @@ local Button = Tab:CreateButton({
             local vehicleModel = workspace.Vehicles:FindFirstChild(vehicleCode)
             if vehicleModel then
                 vehicleModel:SetPrimaryPartCFrame(CFrame.new(targetPosition))
-                print("Teleported vehicle " .. vehicleCode .. " to " .. tostring(targetPosition))
+                --print("Teleported vehicle " .. vehicleCode .. " to " .. tostring(targetPosition))
             else
                 print("Vehicle model not found for code: " .. vehicleCode)
             end

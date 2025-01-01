@@ -1,1 +1,133 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+local Window = Rayfield:CreateWindow({
+    Name = "Notoriety",
+    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+    LoadingTitle = "Notoriety now with Rayfield",
+    LoadingSubtitle = "by True Gamer",
+    Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+ 
+    DisableRayfieldPrompts = false,
+    DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+ 
+    ConfigurationSaving = {
+       Enabled = true,
+       FolderName = Notoriety, -- Create a custom folder for your hub/game
+       FileName = "The Settings file"
+    },
+ 
+    Discord = {
+       Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+       Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    },
+ 
+    KeySystem = false, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "Untitled",
+       Subtitle = "Key System",
+       Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+       Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+    }
+ })
+
+ local Tab = Window:CreateTab("Player", "user")
+
+ local Section = Tab:CreateSection("Interaction")
+
+ local Keybind = Tab:CreateKeybind({
+    Name = "Instant Interact",
+    CurrentKeybind = "X",
+    HoldToInteract = false,
+    Flag = "InstaInteract", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Keybind)
+        for i, v in pairs(game.Workspace:GetDescendants()) do
+            if v:IsA("ProximityPrompt") then
+                local args = {
+                    [1] = v
+                }
+
+                game:GetService("ReplicatedStorage").RS_Package.Remotes.StartInteraction:FireServer(unpack(args))
+                game:GetService("ReplicatedStorage").RS_Package.Remotes.CompleteInteraction:FireServer(unpack(args))
+            end
+        end
+    end,
+ })
+
+ local Section = Tab:CreateSection("Teleports")
+
+ local Keybind = Tab:CreateKeybind({
+    Name = "Teleport bags to Evacuation",
+    CurrentKeybind = "B",
+    HoldToInteract = false,
+    Flag = "bagkey", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Keybind)
+        for i,v in pairs(game:GetService("Workspace").Bags:GetDescendants()) do
+            if v.Name == 'MoneyBag' then
+            v.CFrame = game:GetService("Workspace").BagSecuredArea.FloorPart.CFrame * CFrame.new(0,0,10)
+            end
+        end
+    end,
+ })
+
+ local Keybind = Tab:CreateKeybind({
+    Name = "Teleport Player to Evacuation",
+    CurrentKeybind = "P",
+    HoldToInteract = false,
+    Flag = "playerkey", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Keybind)
+        local plr = game.Players.LocalPlayer.Name
+        game:GetService("Workspace").Criminals[plr].HumanoidRootPart.CFrame = game:GetService("Workspace").BagSecuredArea.FloorPart.CFrame
+    end,
+ })
+
+
+ local Tab1 = Window:CreateTab("Stats", "square-pen")
+
+ local Section = Tab1:CreateSection("Player")
+
+ local Slider = Tab1:CreateSlider({
+    Name = "MaxStamina",
+    Range = {100, 2000},
+    Increment = 10,
+    Suffix = "Stam",
+    CurrentValue = 100,
+    Flag = "StamSlider", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        local plr = game.Players.LocalPlayer.Name
+        local v = game:GetService("Workspace").Criminals[plr]
+        v.MaxStamina.Value = (Value)
+    end,
+ })
+
+ local Button = Tab1:CreateButton({
+    Name = "Fill Stamina?",
+    Callback = function()
+        local plr = game.Players.LocalPlayer.Name
+        local v = game:GetService("Workspace").Criminals[plr]
+        v.Stamina.Value = 2*10e3 --2k
+    end,
+ })
+
+ local Tab2 = Window:CreateTab("Misc", "settings-2")
+
+ local Button = Tab2:CreateButton({
+    Name = "Yeet NPCs",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/2567-rblx/scripts/main/Notoriety/RemoveNPCs.lua",true))()
+    end,
+ })
+
+ local Button = Tab2:CreateButton({
+    Name = "Delete Glass",
+    Callback = function()
+        for i,v in pairs(game:GetService("Workspace").Glass:GetChildren()) do
+            if v.Name == 'Glass' then
+            v:Destroy()
+            end
+        end
+    end,
+ })
